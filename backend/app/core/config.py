@@ -20,6 +20,17 @@ class Settings(BaseSettings):
 
     OPENAI_API_KEY: str = ""
 
+    @property
+    def DATABASE_URL(self) -> str:
+        return (
+            f"postgresql+psycopg2://"
+            f"{self.DATABASE_USER}:"
+            f"{self.DATABASE_PASSWORD}@"
+            f"{self.DATABASE_HOST}:"
+            f"{self.DATABASE_PORT}/"
+            f"{self.DATABASE_NAME}"
+        )
+
     model_config = SettingsConfigDict(
         env_file=".env",
         case_sensitive=True
