@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 
 from app.database.session import SessionLocal
 from app.models.role import Role
+from app.models.organization import Organization
 
 
 DEFAULT_ROLES = [
@@ -30,6 +31,10 @@ DEFAULT_ROLES = [
         "description": "Read-only access to dashboards and reports"
     }
 ]
+DEFAULT_ORGANIZATION={
+    "name": "NetPulse Demo Organization",
+    "description": "Enterprise Network used for demo"
+}
 
 
 def seed_roles(db: Session):
@@ -49,6 +54,18 @@ def seed_roles(db: Session):
             db.add(Role(**role))
 
     db.commit()
+    
+def seed_organization(db: Session):
+    existing= (
+        db.query(Organization)
+        .filter(
+            Organization.name == DEFAULT_ORGANIZATION["name"]
+        )
+        .first()
+    )
+    if not existing:
+        db.add(Organization(**DEFAULT_ORGANIZATION))
+        db.commit()
 
 
 def main():
@@ -57,7 +74,8 @@ def main():
 
     try:
         seed_roles(db)
-        print("✅ Default roles inserted successfully.")
+        seed_organization(db)
+        print("Database Seeded Successfully")
 
     finally:
         db.close()
