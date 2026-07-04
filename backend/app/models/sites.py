@@ -40,9 +40,9 @@ class Site(Base):
     )
     organization: Mapped["Organization"] = relationship(
     back_populates="sites"
-)
+    )
 
-locations: Mapped[list["Location"]] = relationship(
-    back_populates="site",
-    cascade="all, delete-orphan"
-)
+    locations: Mapped[list["Location"]] = relationship(
+        back_populates="site",
+        cascade="all, delete-orphan"
+    )

@@ -33,3 +33,7 @@ class Location(Base):
         "Site",
         back_populates="locations"
     )
+    racks: Mapped[list["Rack"]] = relationship(
+    back_populates="location",
+    cascade="all, delete-orphan"
+)
