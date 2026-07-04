@@ -1,3 +1,4 @@
+from __future__ import annotations
 from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -21,6 +22,10 @@ class Site(Base):
         String(100),
         nullable=False
     )
+    country: Mapped[str] = mapped_column(
+    String(100),
+    nullable=False
+    )
     timezone: Mapped[str]=mapped_column(
         String(100),
         nullable=False
@@ -33,7 +38,11 @@ class Site(Base):
         ForeignKey("organizations.id"),
         nullable=False
     )
-    organization=relationship(
-        "Organization",
-        back_populates="sites"
-    )
+    organization: Mapped["Organization"] = relationship(
+    back_populates="sites"
+)
+
+locations: Mapped[list["Location"]] = relationship(
+    back_populates="site",
+    cascade="all, delete-orphan"
+)
