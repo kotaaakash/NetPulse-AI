@@ -6,3 +6,4 @@ from app.models.location import Location
 from app.models.rack import Rack
 from app.models.device import Device
 from app.models.interface import Interface
+from app.models.interface_link import InterfaceLink

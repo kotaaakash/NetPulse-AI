@@ -65,4 +65,14 @@ class Interface(Base):
     device: Mapped["Device"] = relationship(
         back_populates="interfaces",
     )
-    
+    outgoing_links: Mapped[list["InterfaceLink"]] = relationship(
+    foreign_keys="InterfaceLink.source_interface_id",
+    back_populates="source_interface",
+    cascade="all, delete-orphan",
+    )
+
+    incoming_links: Mapped[list["InterfaceLink"]] = relationship(
+        foreign_keys="InterfaceLink.destination_interface_id",
+        back_populates="destination_interface",
+        cascade="all, delete-orphan",
+    )
