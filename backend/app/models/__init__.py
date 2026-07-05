@@ -5,3 +5,4 @@ from app.models.sites import Site
 from app.models.location import Location
 from app.models.rack import Rack
 from app.models.device import Device
+from app.models.interface import Interface

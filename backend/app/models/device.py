@@ -137,3 +137,7 @@ class Device(Base):
         onupdate=lambda: datetime.now(UTC),
         nullable=False,
     )
+    interfaces: Mapped[list["Interface"]] = relationship(
+    back_populates="device",
+    cascade="all, delete-orphan",
+    )
