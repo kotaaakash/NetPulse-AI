@@ -141,3 +141,7 @@ class Device(Base):
     back_populates="device",
     cascade="all, delete-orphan",
     )
+    configurations: Mapped[list["Configuration"]] = relationship(
+    back_populates="device",
+    cascade="all, delete-orphan",
+    )
