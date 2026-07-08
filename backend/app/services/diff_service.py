@@ -32,4 +32,35 @@ class DiffService:
             lineterm="",
         )
         return "\n".join(diff)
+    @staticmethod
+    def compare_configurations(
+        db: Session,
+        old_configuration_id: int,
+        new_configuration_id: int,
+    ) -> str:
+
+        old_configuration = DiffService.get_configuration(
+            db,
+            old_configuration_id,
+        )
+
+        new_configuration = DiffService.get_configuration(
+            db,
+            new_configuration_id,
+        )
+
+        if old_configuration is None:
+            raise ValueError(
+                f"Configuration {old_configuration_id} not found."
+            )
+
+        if new_configuration is None:
+            raise ValueError(
+                f"Configuration {new_configuration_id} not found."
+            )
+
+        return DiffService.generate_diff(
+            old_configuration.content,
+            new_configuration.content,
+        )
     

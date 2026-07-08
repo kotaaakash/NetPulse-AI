@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 from app.core.config import settings
 from app.api.configuration import router as configuration_router
+from app.api.diff import router as diff_router
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -10,6 +11,7 @@ app = FastAPI(
 )
 
 app.include_router(configuration_router)
+app.include_router(diff_router)
 
 
 @app.get("/")
