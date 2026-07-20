@@ -9,3 +9,4 @@ from app.models.interface import Interface
 from app.models.interface_link import InterfaceLink
 from app.models.configuration import Configuration
 from app.models.change_request import ChangeRequest
+from app.models.audit_log import AuditLog

@@ -8,7 +8,7 @@ from sqlalchemy import (
     ForeignKey,
     String,
     Text,
-)
+    )
 
 from sqlalchemy.orm import (
     Mapped,
@@ -108,4 +108,8 @@ class ChangeRequest(Base):
         "User",
         foreign_keys=[approved_by],
         back_populates="approved_changes",
+    )
+    audit_logs: Mapped[list["AuditLog"]] = relationship(
+    back_populates="change_request",
+    cascade="all, delete-orphan",
     )

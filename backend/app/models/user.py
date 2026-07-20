@@ -45,3 +45,6 @@ class User(Base):
         foreign_keys="ChangeRequest.approved_by",
         back_populates="approver",
     )
+    audit_logs: Mapped[list["AuditLog"]] = relationship(
+    back_populates="user",
+    )

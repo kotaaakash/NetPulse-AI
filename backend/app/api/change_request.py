@@ -83,3 +83,108 @@ def get_change_request(
         )
 
     return change_request
+@router.post(
+    "/{change_request_id}/submit",
+    response_model=ChangeRequestResponse,
+    summary="Submit a change request",
+)
+def submit_change_request(
+    change_request_id: int,
+    db: Session = Depends(get_db),
+):
+    try:
+        return ChangeRequestService.submit_change_request(
+            db=db,
+            change_request_id=change_request_id,
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=400,
+            detail=str(error),
+        )
+    
+@router.post(
+    "/{change_request_id}/approve",
+    response_model=ChangeRequestResponse,
+    summary="Approve a change request",
+)
+def approve_change_request(
+    change_request_id: int,
+    db: Session = Depends(get_db),
+):
+    try:
+        return ChangeRequestService.approve_change_request(
+            db=db,
+            change_request_id=change_request_id,
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=400,
+            detail=str(error),
+        )
+    
+@router.post(
+    "/{change_request_id}/reject",
+    response_model=ChangeRequestResponse,
+    summary="Reject a change request",
+)
+def reject_change_request(
+    change_request_id: int,
+    db: Session = Depends(get_db),
+):
+    try:
+        return ChangeRequestService.reject_change_request(
+            db=db,
+            change_request_id=change_request_id,
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=400,
+            detail=str(error),
+        )
+@router.post(
+    "/{change_request_id}/deploy",
+    response_model=ChangeRequestResponse,
+    summary="Deploy a change request",
+)
+def deploy_change_request(
+    change_request_id: int,
+    db: Session = Depends(get_db),
+):
+    try:
+        return ChangeRequestService.deploy_change_request(
+            db=db,
+            change_request_id=change_request_id,
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=400,
+            detail=str(error),
+        )
+    
+@router.post(
+    "/{change_request_id}/rollback",
+    response_model=ChangeRequestResponse,
+    summary="Rollback a deployed change request",
+)
+def rollback_change_request(
+    change_request_id: int,
+    db: Session = Depends(get_db),
+):
+    try:
+        return ChangeRequestService.rollback_change_request(
+            db=db,
+            change_request_id=change_request_id,
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=400,
+            detail=str(error),
+        )
+        
+        
