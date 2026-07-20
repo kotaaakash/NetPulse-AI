@@ -14,14 +14,37 @@ Reduce network outages caused by configuration mistakes by providing intelligent
 
 ## Features
 
-- Device Inventory
-- Network Topology
-- Change Requests
-- AI Risk Analysis
-- Configuration Diff
-- Incident Timeline
-- Executive Dashboard
+### Infrastructure Management
+- Organizations
+- Sites
+- Locations
+- Racks
+- Devices
+- Interfaces
 
+### Configuration Management
+- Configuration upload
+- Automatic versioning
+- SHA-256 checksum verification
+- Duplicate configuration detection
+- Configuration history
+- Configuration diff comparison
+- Configuration rollback
+
+### Change Management
+- Create change requests
+- View change requests
+- Track change request status
+- Associate changes with devices
+- Associate changes with configuration versions
+
+### Backend
+- FastAPI
+- SQLAlchemy ORM
+- Alembic migrations
+- PostgreSQL
+- Pydantic validation
+- Swagger/OpenAPI documentation
 ---
 
 ## Tech Stack
