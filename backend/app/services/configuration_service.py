@@ -114,3 +114,49 @@ class ConfigurationService:
             .order_by(Configuration.version.desc())
             .all()
         )
+    @staticmethod
+    def get_configuration(
+        db: Session,
+        configuration_id: int,
+    ) -> Configuration | None:
+        return (
+            db.query(Configuration)
+            .filter(
+                Configuration.id == configuration_id
+            )
+            .first()
+        )
+    @staticmethod
+    def rollback_configuration(
+        db: Session,
+        configuration_id: int,
+    ) -> Configuration:
+
+        configuration = ConfigurationService.get_configuration(
+            db,
+            configuration_id,
+        )
+
+        if configuration is None:
+            raise ValueError(
+                f"Configuration {configuration_id} not found."
+            )
+
+        next_version = ConfigurationService.get_next_version(
+            db,
+            configuration.device_id,
+        )
+
+        rollback_configuration = Configuration(
+            device_id=configuration.device_id,
+            version=next_version,
+            config_type=configuration.config_type,
+            checksum=configuration.checksum,
+            content=configuration.content,
+        )
+
+        db.add(rollback_configuration)
+        db.commit()
+        db.refresh(rollback_configuration)
+
+        return rollback_configuration

@@ -62,3 +62,6 @@ class Configuration(Base):
         default=lambda: datetime.now(UTC),
         nullable=False,
     )
+    change_requests: Mapped[list["ChangeRequest"]] = relationship(
+    back_populates="configuration",
+    )

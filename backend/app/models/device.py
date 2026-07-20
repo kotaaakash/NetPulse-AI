@@ -4,7 +4,6 @@ from datetime import UTC, datetime
 
 from sqlalchemy import DateTime, Enum, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
 from app.database.base import Base
 from app.enums.device import (
     DeviceStatus,
@@ -142,6 +141,10 @@ class Device(Base):
     cascade="all, delete-orphan",
     )
     configurations: Mapped[list["Configuration"]] = relationship(
+    back_populates="device",
+    cascade="all, delete-orphan",
+    )
+    change_requests: Mapped[list["ChangeRequest"]] = relationship(
     back_populates="device",
     cascade="all, delete-orphan",
     )

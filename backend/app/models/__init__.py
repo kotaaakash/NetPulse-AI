@@ -8,3 +8,4 @@ from app.models.device import Device
 from app.models.interface import Interface
 from app.models.interface_link import InterfaceLink
 from app.models.configuration import Configuration
+from app.models.change_request import ChangeRequest

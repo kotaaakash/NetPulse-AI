@@ -88,3 +88,27 @@ def get_latest_configuration(
         )
 
     return configuration
+
+@router.post(
+    "/{device_id}/configurations/{configuration_id}/rollback",
+    response_model=ConfigurationResponse,
+    summary="Rollback to a previous configuration",
+)
+def rollback_configuration(
+    device_id: int,
+    configuration_id: int,
+    db: Session = Depends(get_db),
+):
+    try:
+        configuration = ConfigurationService.rollback_configuration(
+            db,
+            configuration_id,
+        )
+
+        return configuration
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=404,
+            detail=str(error),
+        )
